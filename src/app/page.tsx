@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   Bot,
@@ -18,8 +19,11 @@ import {
   Sparkles,
   Zap,
   Shield,
-  Menu,
-  X,
+  Send,
+  Search,
+  Mic,
+  FileText,
+  Brain,
 } from "lucide-react";
 
 /* ─────────────── helpers ─────────────── */
@@ -48,109 +52,23 @@ const scaleIn = {
   }),
 };
 
-/* ─────────────── Navbar ─────────────── */
+/* ─────────────── Floating Logo ─────────────── */
 
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
-  const links = [
-    { label: "Features", href: "#features" },
-    { label: "How It Works", href: "#how" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
-  ];
-
+function FloatingLogo() {
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800/50"
-          : "bg-transparent"
-      }`}
+    <motion.a
+      href="#"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="fixed top-5 left-5 z-50 flex items-center gap-2 group"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="relative">
-              <Bot className="w-8 h-8 text-pink-500 pink-glow transition-transform group-hover:scale-110" />
-              <div className="absolute inset-0 bg-pink-500/20 blur-xl rounded-full" />
-            </div>
-            <span className="text-xl font-bold gradient-text">Pinky</span>
-          </a>
-
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm text-zinc-400 hover:text-pink-400 transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              className="px-4 py-2 rounded-full bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium transition-all hover:shadow-lg hover:shadow-pink-500/25"
-            >
-              Get Started
-            </a>
-          </div>
-
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden text-zinc-400 hover:text-white"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+      <div className="relative">
+        <Bot className="w-8 h-8 text-pink-500 pink-glow transition-transform group-hover:scale-110" />
+        <div className="absolute inset-0 bg-pink-500/20 blur-xl rounded-full" />
       </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800"
-          >
-            <div className="px-4 py-4 flex flex-col gap-3">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-zinc-300 hover:text-pink-400 transition-colors py-2"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 px-4 py-2 rounded-full bg-pink-600 text-white text-center font-medium"
-              >
-                Get Started
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      <span className="text-xl font-bold gradient-text">Pinky</span>
+    </motion.a>
   );
 }
 
@@ -196,78 +114,97 @@ function Hero() {
 
       <Particles />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        {/* Logo */}
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-          className="mb-8 inline-block"
-        >
-          <div className="relative">
-            <Bot className="w-20 h-20 text-pink-500 mx-auto" />
-            <div className="absolute inset-0 bg-pink-500/30 blur-2xl rounded-full" />
+      <motion.div style={{ y, opacity }} className="relative z-10 px-4 max-w-7xl mx-auto w-full">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
+          <div className="text-center lg:text-left">
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-pink-400 text-sm md:text-base font-mono mb-4 tracking-wider uppercase"
+            >
+              The same thing we do every night...
+            </motion.p>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            >
+              Do you want your own{" "}
+              <span className="gradient-text">AI agent?</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-lg md:text-xl text-zinc-400 max-w-xl mx-auto lg:mx-0 mb-4 leading-relaxed"
+            >
+              Name it whatever you want. We don&apos;t give a shit. Pinky, Brain,
+              Jarvis, Karen — your call.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.8 }}
+              className="text-base md:text-lg text-zinc-500 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+            >
+              It manages tasks, writes emails, does research, and tries to take over
+              the world. Well... your business world.
+            </motion.p>
+
+            {/* CTAs */}
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute -inset-4 bg-pink-500/10 blur-3xl rounded-full"
-            />
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4"
+            >
+              <a
+                href="#contact"
+                className="group relative px-8 py-4 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-pink-500/30 flex items-center gap-2"
+              >
+                Get Your Own AI Agent
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </a>
+              <a
+                href="#pricing"
+                className="px-8 py-4 rounded-full border border-zinc-700 hover:border-pink-500/50 text-zinc-300 hover:text-white font-medium text-lg transition-all"
+              >
+                View Pricing
+              </a>
+            </motion.div>
           </div>
-        </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-pink-400 text-sm md:text-base font-mono mb-4 tracking-wider uppercase"
-        >
-          The same thing we do every night...
-        </motion.p>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight"
-        >
-          What if your AI{" "}
-          <span className="gradient-text">actually did the work?</span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed"
-        >
-          Meet Pinky — an AI agent that manages tasks, writes emails, does research,
-          and tries to take over the world. Well... your business world.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="#features"
-            className="group relative px-8 py-4 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-pink-500/30 flex items-center gap-2"
+          {/* Right: Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.8, type: "spring", stiffness: 80 }}
+            className="relative hidden lg:block"
           >
-            See What Pinky Can Do
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </a>
-          <a
-            href="#pricing"
-            className="px-8 py-4 rounded-full border border-zinc-700 hover:border-pink-500/50 text-zinc-300 hover:text-white font-medium text-lg transition-all"
-          >
-            View Pricing
-          </a>
-        </motion.div>
+            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10">
+              <Image
+                src="/images/hero-pinky.png"
+                alt="Pinky at the holographic command center"
+                width={700}
+                height={500}
+                className="w-full h-auto rounded-2xl"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent" />
+            </div>
+            {/* Glow behind image */}
+            <div className="absolute -inset-4 bg-pink-500/5 blur-3xl rounded-full -z-10" />
+          </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
@@ -314,57 +251,84 @@ function Problem() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 px-4">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          variants={fade}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="text-3xl md:text-5xl font-bold mb-4"
-        >
-          You hired humans.{" "}
-          <span className="text-zinc-500">They disappointed you.</span>
-        </motion.h2>
-
-        <motion.p
-          variants={fade}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={1}
-          className="text-zinc-500 text-lg mb-16 max-w-xl mx-auto"
-        >
-          We get it. We&apos;ve been there too.
-        </motion.p>
-
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
-          {problems.map((p, i) => (
-            <motion.div
-              key={p.title}
-              variants={scaleIn}
+      <div className="max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Left: Problem text */}
+          <div>
+            <motion.h2
+              variants={fade}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
-              custom={i}
-              className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 card-glow transition-all duration-300 hover:border-pink-500/30"
+              className="text-3xl md:text-5xl font-bold mb-4"
             >
-              <div className="w-14 h-14 rounded-xl bg-red-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-red-500/20 transition-colors">
-                <p.icon className="w-7 h-7 text-red-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{p.title}</h3>
-              <p className="text-zinc-400 leading-relaxed">{p.desc}</p>
-            </motion.div>
-          ))}
+              You hired humans.{" "}
+              <span className="text-zinc-500">They disappointed you.</span>
+            </motion.h2>
+
+            <motion.p
+              variants={fade}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              custom={1}
+              className="text-zinc-500 text-lg mb-8"
+            >
+              We get it. We&apos;ve been there too.
+            </motion.p>
+
+            <div className="space-y-4">
+              {problems.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  variants={fade}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
+                  custom={i + 2}
+                  className="group flex items-start gap-4 bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 card-glow transition-all duration-300 hover:border-pink-500/30"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center shrink-0 group-hover:bg-red-500/20 transition-colors">
+                    <p.icon className="w-6 h-6 text-red-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">{p.title}</h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Image */}
+          <motion.div
+            variants={fade}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            custom={3}
+            className="relative hidden lg:block"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10">
+              <Image
+                src="/images/human-bot-chat.png"
+                alt="Businessman with holographic AI assistant"
+                width={600}
+                height={400}
+                className="w-full h-auto rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent" />
+            </div>
+            <div className="absolute -inset-4 bg-pink-500/5 blur-3xl rounded-full -z-10" />
+          </motion.div>
         </div>
 
         <motion.div
           variants={fade}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          custom={4}
-          className="relative"
+          custom={5}
+          className="relative text-center"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/5 to-transparent" />
           <p className="text-2xl md:text-4xl font-bold py-8">
-            What if there was a{" "}
-            <span className="gradient-text">better way?</span>
+            <span className="text-zinc-500 italic font-normal">&quot;Are you pondering what I&apos;m pondering?&quot;</span>
           </p>
         </motion.div>
       </div>
@@ -372,7 +336,111 @@ function Problem() {
   );
 }
 
-/* ─────────────── Features ─────────────── */
+/* ─────────────── What Would YOUR Pinky Do? ─────────────── */
+
+function WhatWouldPinkyDo() {
+  const { ref, inView } = useSection();
+
+  const examples = [
+    {
+      icon: Send,
+      text: "Send 50 personalized emails before you finish your coffee",
+    },
+    {
+      icon: Search,
+      text: "Research your competitors while you sleep",
+    },
+    {
+      icon: ClipboardList,
+      text: "Manage your team\u2019s tasks without a single meeting",
+    },
+    {
+      icon: Mic,
+      text: "Turn voice notes into organized knowledge bases",
+    },
+    {
+      icon: FileText,
+      text: "Generate reports that actually make sense",
+    },
+    {
+      icon: Brain,
+      text: "Learn your business and get smarter every single day",
+    },
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 right-0 w-72 h-72 bg-pink-500/5 rounded-full blur-3xl -translate-y-1/2" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Image */}
+          <motion.div
+            variants={fade}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            className="relative order-2 lg:order-1"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10">
+              <Image
+                src="/images/pinky-multitask.png"
+                alt="Pinky juggling multiple tasks"
+                width={600}
+                height={400}
+                className="w-full h-auto rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent" />
+            </div>
+            <div className="absolute -inset-4 bg-pink-500/5 blur-3xl rounded-full -z-10" />
+          </motion.div>
+
+          {/* Right: Content */}
+          <div className="order-1 lg:order-2">
+            <motion.div
+              variants={fade}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              className="mb-8"
+            >
+              <p className="text-pink-400 font-mono text-sm uppercase tracking-wider mb-3">
+                Your AI, Your Rules
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                What would <span className="gradient-text">YOUR</span> Pinky do?
+              </h2>
+              <p className="text-zinc-400 text-lg">
+                One is a genius, the other&apos;s AI. They&apos;re Pinky and the...
+                well, you&apos;re the Brain.
+              </p>
+            </motion.div>
+
+            <div className="space-y-3">
+              {examples.map((ex, i) => (
+                <motion.div
+                  key={i}
+                  variants={fade}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
+                  custom={i + 1}
+                  className="flex items-center gap-4 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-pink-500/30 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center shrink-0 group-hover:bg-pink-500/20 transition-colors">
+                    <ex.icon className="w-5 h-5 text-pink-400" />
+                  </div>
+                  <span className="text-zinc-300 font-medium">{ex.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────── Features / Command Center ─────────────── */
 
 function Features() {
   const { ref, inView } = useSection();
@@ -381,7 +449,7 @@ function Features() {
     {
       icon: ClipboardList,
       title: "Task Management",
-      desc: "Kanban boards, batch creation, subtasks, real-time sync. Like Jira, but it doesn't make you want to cry.",
+      desc: "Kanban boards, batch creation, subtasks, real-time sync. Like Jira, but it doesn\u2019t make you want to cry.",
     },
     {
       icon: Bot,
@@ -401,7 +469,7 @@ function Features() {
     {
       icon: BarChart3,
       title: "Reports & Analytics",
-      desc: "Auto-generated with real data. No more \"I'll have that report by Friday\" lies.",
+      desc: "Auto-generated with real data. No more \u201CI\u2019ll have that report by Friday\u201D lies.",
     },
     {
       icon: Mail,
@@ -412,7 +480,6 @@ function Features() {
 
   return (
     <section id="features" ref={ref} className="relative py-24 md:py-32 px-4">
-      {/* Background accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -434,15 +501,15 @@ function Features() {
           </p>
         </motion.div>
 
-        {/* Dashboard mockup */}
+        {/* Platform Showcase with real image */}
         <motion.div
           variants={fade}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           custom={1}
-          className="relative mb-16 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900/50"
+          className="relative mb-6 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900/50"
         >
-          <div className="aspect-video relative">
+          <div className="relative">
             {/* Fake browser chrome */}
             <div className="h-10 bg-zinc-900 border-b border-zinc-800 flex items-center px-4 gap-2">
               <div className="w-3 h-3 rounded-full bg-red-500/70" />
@@ -450,69 +517,66 @@ function Features() {
               <div className="w-3 h-3 rounded-full bg-green-500/70" />
               <div className="flex-1 mx-4">
                 <div className="bg-zinc-800 rounded-md h-6 max-w-md mx-auto flex items-center px-3">
-                  <span className="text-xs text-zinc-500 font-mono">pinky.stepten.io</span>
+                  <span className="text-xs text-zinc-500 font-mono">pinky.stepten.io/dashboard</span>
                 </div>
               </div>
             </div>
-            {/* Dashboard content */}
-            <div className="p-6 grid grid-cols-12 gap-4 h-[calc(100%-40px)]">
-              {/* Sidebar */}
-              <div className="col-span-2 hidden md:flex flex-col gap-3">
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-8 rounded-lg ${
-                      i === 0
-                        ? "bg-pink-500/20 border border-pink-500/30"
-                        : "bg-zinc-800/50"
-                    }`}
-                  />
-                ))}
+            {/* Dashboard image */}
+            <div className="relative">
+              <Image
+                src="/images/dashboard-showcase.png"
+                alt="Pinky Command Center Dashboard"
+                width={1200}
+                height={675}
+                className="w-full h-auto"
+              />
+              {/* Overlay floating UI elements */}
+              <div className="absolute top-4 right-4 hidden md:block">
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="bg-pink-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg shadow-pink-500/30"
+                >
+                  <Zap className="w-3 h-3 inline mr-1" />
+                  12 tasks completed
+                </motion.div>
               </div>
-              {/* Main area */}
-              <div className="col-span-12 md:col-span-7 flex flex-col gap-3">
-                <div className="h-8 w-48 bg-zinc-800/50 rounded-lg" />
-                <div className="flex gap-3 flex-1">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="flex-1 bg-zinc-800/30 rounded-xl p-3 flex flex-col gap-2">
-                      <div className="h-4 w-20 bg-zinc-700/50 rounded" />
-                      {[...Array(3 - i)].map((_, j) => (
-                        <div
-                          key={j}
-                          className={`h-16 rounded-lg border ${
-                            i === 0
-                              ? "bg-pink-500/5 border-pink-500/20"
-                              : "bg-zinc-800/50 border-zinc-700/30"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </div>
+              <div className="absolute bottom-8 left-4 hidden md:block">
+                <motion.div
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+                  className="bg-zinc-900/90 border border-pink-500/30 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm"
+                >
+                  <Mail className="w-3 h-3 inline mr-1 text-pink-400" />
+                  3 emails queued
+                </motion.div>
               </div>
-              {/* Right panel */}
-              <div className="col-span-3 hidden md:flex flex-col gap-3">
-                <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-xl p-3 flex-1 border border-pink-500/10">
-                  <div className="h-4 w-16 bg-pink-500/20 rounded mb-3" />
-                  <div className="h-20 bg-zinc-800/30 rounded-lg mb-2" />
-                  <div className="h-3 w-full bg-zinc-700/30 rounded" />
-                  <div className="h-3 w-3/4 bg-zinc-700/20 rounded mt-1" />
-                </div>
-                <div className="bg-zinc-800/30 rounded-xl p-3 flex-1">
-                  <div className="h-4 w-20 bg-zinc-700/50 rounded mb-3" />
-                  {[...Array(4)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 rounded-full bg-zinc-700/50" />
-                      <div className="h-3 flex-1 bg-zinc-700/30 rounded" />
-                    </div>
-                  ))}
-                </div>
+              <div className="absolute top-1/3 left-8 hidden md:block">
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+                  className="bg-zinc-900/90 border border-purple-500/30 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm"
+                >
+                  <BarChart3 className="w-3 h-3 inline mr-1 text-purple-400" />
+                  Report generating...
+                </motion.div>
               </div>
             </div>
-            {/* Gradient overlay */}
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-zinc-900/80 to-transparent" />
+            {/* Bottom gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-900/80 to-transparent" />
           </div>
         </motion.div>
+
+        {/* Caption */}
+        <motion.p
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={2}
+          className="text-center text-zinc-500 text-sm mb-16 italic"
+        >
+          This is what your command center looks like. Built in 48 hours.
+        </motion.p>
 
         {/* Feature cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -522,7 +586,7 @@ function Features() {
               variants={scaleIn}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
-              custom={i + 2}
+              custom={i + 3}
               className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 card-glow transition-all duration-300 hover:border-pink-500/30 hover:-translate-y-1"
             >
               <div className="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center mb-4 group-hover:bg-pink-500/20 transition-colors">
@@ -560,7 +624,7 @@ function HowItWorks() {
       num: "03",
       icon: Shield,
       title: "Your AI gets to work",
-      desc: "Tasks, emails, research, reporting — all automated. You sit back and pretend you're still working.",
+      desc: "Tasks, emails, research, reporting \u2014 all automated. You sit back and pretend you\u2019re still working.",
     },
   ];
 
@@ -617,6 +681,20 @@ function HowItWorks() {
             </motion.div>
           ))}
         </div>
+
+        {/* Transition quote */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={5}
+          className="text-center mt-20"
+        >
+          <p className="text-2xl md:text-3xl font-bold text-zinc-500 italic">
+            &quot;Same thing we do every night...{" "}
+            <span className="gradient-text not-italic">automate your entire business.</span>&quot;
+          </p>
+        </motion.div>
       </div>
     </section>
   );
@@ -693,9 +771,9 @@ function Pricing() {
         "Command center dashboard",
         "Supabase backend setup",
         "Vercel deployment",
-        "2 weeks of support",
+        "30 days of support",
       ],
-      cta: "Get Started",
+      cta: "Get Your Own AI Agent",
       popular: false,
     },
     {
@@ -712,7 +790,7 @@ function Pricing() {
         "30 days of support",
         "Priority response time",
       ],
-      cta: "Go Pro",
+      cta: "Get Your Own AI Agent",
       popular: true,
     },
     {
@@ -729,7 +807,7 @@ function Pricing() {
         "Quarterly strategy reviews",
         "First dibs on world domination",
       ],
-      cta: "Contact Us",
+      cta: "Get Your Own AI Agent",
       popular: false,
     },
   ];
@@ -805,6 +883,17 @@ function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        {/* Support note */}
+        <motion.p
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={5}
+          className="text-center text-zinc-500 text-sm mt-8"
+        >
+          All prices include setup, training, and 30 days of support.
+        </motion.p>
       </div>
     </section>
   );
@@ -867,15 +956,15 @@ function FAQ() {
   const faqs = [
     {
       q: "Is this actually AI or just a chatbot?",
-      a: "Pinky uses Claude by Anthropic — the most capable AI model available. This isn't some GPT wrapper garbage with a pretty UI. Your AI agent reasons, plans, executes tasks, manages workflows, and learns your business. It's the real deal.",
+      a: "Pinky uses Claude by Anthropic \u2014 the most capable AI model available. This isn\u2019t some GPT wrapper garbage with a pretty UI. Your AI agent reasons, plans, executes tasks, manages workflows, and learns your business. It\u2019s the real deal.",
     },
     {
       q: "Can it really replace employees?",
-      a: "It replaced 12 of ours. You do the math. But seriously — it handles repetitive, time-consuming tasks that eat up your team's day. Think of it as your most productive team member who never sleeps.",
+      a: "It replaced 12 of ours. You do the math. But seriously \u2014 it handles repetitive, time-consuming tasks that eat up your team\u2019s day. Think of it as your most productive team member who never sleeps.",
     },
     {
       q: "What if it breaks?",
-      a: "NARF! It won't. But we've got you covered with dedicated support, monitoring, and a team that actually responds to messages. Unlike your last IT support.",
+      a: "NARF! It won\u2019t. But we\u2019ve got you covered with dedicated support, monitoring, and a team that actually responds to messages. Unlike your last IT support.",
     },
     {
       q: "How long does setup take?",
@@ -959,7 +1048,7 @@ function CTAFooter() {
             className="flex-1 px-5 py-3.5 rounded-full bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/50 transition-all"
           />
           <button className="px-8 py-3.5 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-pink-500/25 flex items-center justify-center gap-2">
-            Get Started
+            Get Your Own AI Agent
             <ArrowRight className="w-4 h-4" />
           </button>
         </motion.div>
@@ -978,7 +1067,7 @@ function CTAFooter() {
           >
             book a call
           </a>
-          {" "}— we&apos;ll respond faster than your AI (almost).
+          {" "}&mdash; we&apos;ll respond faster than your AI (almost).
         </motion.p>
       </motion.div>
     </section>
@@ -990,34 +1079,29 @@ function CTAFooter() {
 function Footer() {
   return (
     <footer className="border-t border-zinc-800/50 py-8 px-4">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-4">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-pink-500" />
           <span className="text-sm text-zinc-500">
-            Powered by{" "}
+            Built by{" "}
             <a
               href="https://stepten.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-pink-400 transition-colors"
+              className="text-zinc-400 hover:text-pink-400 transition-colors font-medium"
             >
               StepTen Inc
             </a>
           </span>
         </div>
 
-        <p className="text-sm text-zinc-600 italic">
-          &quot;Gee Brain, I think we should sign up!&quot;
+        <p className="text-xs text-zinc-600">
+          Powered by Anthropic Claude, Supabase, and pure audacity.
         </p>
 
-        <div className="flex items-center gap-6 text-sm text-zinc-500">
-          <a href="#" className="hover:text-pink-400 transition-colors">
-            Privacy
-          </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
-            Terms
-          </a>
-        </div>
+        <p className="text-sm text-zinc-600 italic">
+          &quot;Gee Brain, what are we going to do tomorrow night?&quot;
+        </p>
       </div>
     </footer>
   );
@@ -1028,9 +1112,10 @@ function Footer() {
 export default function Home() {
   return (
     <main className="relative">
-      <Navbar />
+      <FloatingLogo />
       <Hero />
       <Problem />
+      <WhatWouldPinkyDo />
       <Features />
       <HowItWorks />
       <Testimonial />
