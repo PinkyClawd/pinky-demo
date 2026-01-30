@@ -105,13 +105,13 @@ function FloatingLogo() {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="fixed top-5 left-5 z-50 flex items-center gap-2 group"
+      className="fixed top-3 left-3 md:top-5 md:left-5 z-50 flex items-center gap-2 group"
     >
       <div className="relative">
-        <Bot className="w-8 h-8 text-pink-500 pink-glow transition-transform group-hover:scale-110" />
+        <Bot className="w-6 h-6 md:w-8 md:h-8 text-pink-500 pink-glow transition-transform group-hover:scale-110" />
         <div className="absolute inset-0 bg-pink-500/20 blur-xl rounded-full" />
       </div>
-      <span className="text-xl font-bold gradient-text">Pinky</span>
+      <span className="text-lg md:text-xl font-bold gradient-text">Pinky</span>
     </motion.a>
   );
 }
@@ -159,7 +159,7 @@ function Hero() {
       <Particles />
 
       <motion.div style={{ y, opacity }} className="relative z-10 px-4 max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Text */}
           <div className="text-center lg:text-left">
             {/* Tagline */}
@@ -177,7 +177,7 @@ function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
             >
               You had the idea.{" "}
               <span className="gradient-text">Now meet the rat that builds it.</span>
@@ -214,14 +214,14 @@ function Hero() {
             >
               <a
                 href="#contact"
-                className="group relative px-8 py-4 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-pink-500/30 flex items-center gap-2"
+                className="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-pink-500/30 flex items-center justify-center gap-2"
               >
                 Get Your Own AI Agent
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#pricing"
-                className="px-8 py-4 rounded-full border border-zinc-700 hover:border-pink-500/50 text-zinc-300 hover:text-white font-medium text-lg transition-all"
+                className="w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-700 hover:border-pink-500/50 text-zinc-300 hover:text-white font-medium text-lg transition-all text-center"
               >
                 View Pricing
               </a>
@@ -233,9 +233,9 @@ function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.8, type: "spring", stiffness: 80 }}
-            className="relative hidden lg:block"
+            className="relative max-w-sm mx-auto lg:max-w-none"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10 animate-bob">
+            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10 lg:animate-bob">
               <Image
                 src="/images/hero-pinky.png"
                 alt="Pinky at the holographic command center"
@@ -295,9 +295,9 @@ function Problem() {
   ];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           {/* Left: Problem text */}
           <div>
             <motion.h2
@@ -435,7 +435,7 @@ function WhatPinkyDoes() {
   ];
 
   return (
-    <section id="features" ref={ref} className="relative py-24 md:py-32 px-4">
+    <section id="features" ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -573,7 +573,7 @@ function SaaSReplacement() {
   ];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-500/[0.02] to-transparent" />
 
@@ -613,7 +613,7 @@ function SaaSReplacement() {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             custom={2}
-            className="relative bg-zinc-900/30 border border-zinc-800/50 rounded-2xl p-8 overflow-hidden"
+            className="relative bg-zinc-900/30 border border-zinc-800/50 rounded-2xl p-5 md:p-8 overflow-hidden"
           >
             {/* Big X overlay */}
             <motion.div
@@ -664,7 +664,7 @@ function SaaSReplacement() {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             custom={3}
-            className="relative bg-gradient-to-b from-pink-500/10 to-purple-500/5 border-2 border-pink-500/30 rounded-2xl p-8 animate-glow-pulse overflow-hidden"
+            className="relative bg-gradient-to-b from-pink-500/10 to-purple-500/5 border-2 border-pink-500/30 rounded-2xl p-5 md:p-8 animate-glow-pulse overflow-hidden"
           >
             <div className="relative z-10">
               <h3 className="text-xl font-bold text-pink-400 mb-6 flex items-center gap-2">
@@ -740,7 +740,7 @@ function TwoTypesBrain() {
   const { ref, inView } = useSection();
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-72 h-72 bg-pink-500/5 rounded-full blur-3xl -translate-y-1/2" />
@@ -802,8 +802,8 @@ function TwoTypesBrain() {
             </div>
 
             {/* Content */}
-            <div className="p-8">
-              <h3 className="text-2xl font-bold mb-2">Your Rat + Your Dashboard</h3>
+            <div className="p-5 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Your Rat + Your Dashboard</h3>
               <p className="text-pink-400 text-sm font-medium mb-4">Run your business from your phone</p>
 
               <div className="space-y-3 mb-6">
@@ -822,11 +822,11 @@ function TwoTypesBrain() {
                 ))}
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <span className="text-zinc-500 text-sm">From <span className="text-white font-bold text-lg">$5,000</span></span>
                 <a
                   href="#pricing"
-                  className="px-6 py-2.5 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-pink-500/25 flex items-center gap-2"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-pink-500/25 flex items-center justify-center gap-2"
                 >
                   Get Your Dashboard
                   <ArrowRight className="w-4 h-4" />
@@ -862,8 +862,8 @@ function TwoTypesBrain() {
             </div>
 
             {/* Content */}
-            <div className="p-8">
-              <h3 className="text-2xl font-bold mb-2">Build My Thing</h3>
+            <div className="p-5 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Build My Thing</h3>
               <p className="text-purple-400 text-sm font-medium mb-4">You have the idea. The rat builds it.</p>
 
               <div className="space-y-3 mb-6">
@@ -882,11 +882,11 @@ function TwoTypesBrain() {
                 ))}
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <span className="text-zinc-500 text-sm">From <span className="text-white font-bold text-lg">$10,000</span></span>
                 <a
                   href="#pricing"
-                  className="px-6 py-2.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-purple-500/25 flex items-center gap-2"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
                 >
                   Build Your Thing
                   <ArrowRight className="w-4 h-4" />
@@ -980,7 +980,7 @@ function WhatWouldPinkyDo() {
   const scrollItems = [...businessTypes, ...businessTypes];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-72 h-72 bg-pink-500/5 rounded-full blur-3xl -translate-y-1/2" />
@@ -1116,7 +1116,7 @@ function EcosystemSection() {
   ];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.02] to-transparent" />
 
@@ -1151,7 +1151,7 @@ function EcosystemSection() {
         </motion.p>
 
         {/* Three pillars */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8 mb-16">
           {pillars.map((p, i) => (
             <motion.div
               key={p.title}
@@ -1159,7 +1159,7 @@ function EcosystemSection() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               custom={i + 2}
-              className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 card-glow transition-all duration-300 hover:border-pink-500/30 hover:-translate-y-1"
+              className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-5 md:p-8 card-glow transition-all duration-300 hover:border-pink-500/30 hover:-translate-y-1"
             >
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/15 to-purple-500/15 flex items-center justify-center mb-5 group-hover:from-pink-500/25 group-hover:to-purple-500/25 transition-all">
                 <p.icon className="w-7 h-7 text-pink-400" />
@@ -1217,12 +1217,12 @@ function TalkFromAnywhere() {
   ];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Content */}
           <div>
             {/* Header */}
@@ -1322,7 +1322,7 @@ function NotJustAChatbot() {
   const { ref, inView } = useSection();
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/[0.02] to-transparent" />
 
@@ -1342,14 +1342,14 @@ function NotJustAChatbot() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-12">
           {/* ChatGPT side */}
           <motion.div
             variants={fade}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             custom={1}
-            className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8"
+            className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-5 md:p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center">
@@ -1379,7 +1379,7 @@ function NotJustAChatbot() {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             custom={2}
-            className="bg-gradient-to-b from-pink-500/10 to-purple-500/5 border-2 border-pink-500/30 rounded-2xl p-8 card-glow"
+            className="bg-gradient-to-b from-pink-500/10 to-purple-500/5 border-2 border-pink-500/30 rounded-2xl p-5 md:p-8 card-glow"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
@@ -1456,7 +1456,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how" ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section id="how" ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl -translate-y-1/2" />
@@ -1492,12 +1492,12 @@ function HowItWorks() {
               {/* Number circle */}
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="w-28 h-28 mx-auto mb-6 relative"
+                className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-6 relative"
               >
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30" />
                 <div className="absolute inset-2 rounded-full bg-zinc-950 flex items-center justify-center">
                   <div className="text-center">
-                    <span className="text-2xl font-bold gradient-text">{s.num}</span>
+                    <span className="text-xl md:text-2xl font-bold gradient-text">{s.num}</span>
                     <s.icon className="w-5 h-5 text-pink-400 mx-auto mt-1" />
                   </div>
                 </div>
@@ -1533,7 +1533,7 @@ function RatPack() {
   const { ref, inView } = useSection();
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.03] to-transparent" />
 
@@ -1563,7 +1563,7 @@ function RatPack() {
           Need more rats? We&apos;ve got rats.
         </motion.p>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           {/* Left: Team rats image */}
           <motion.div
             variants={slideInLeft}
@@ -1656,7 +1656,7 @@ function RatPack() {
           custom={8}
           className="relative"
         >
-          <div className="grid lg:grid-cols-2 gap-8 items-center bg-zinc-900/30 border border-zinc-800 rounded-2xl p-8 md:p-12">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center bg-zinc-900/30 border border-zinc-800 rounded-2xl p-5 md:p-8 lg:p-12">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 And they <span className="text-pink-400">never.</span>{" "}
@@ -1692,7 +1692,7 @@ function Testimonial() {
   const { ref, inView } = useSection();
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 px-4">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/[0.02] to-transparent" />
 
       <motion.div
@@ -1805,7 +1805,7 @@ function Pricing() {
   ];
 
   return (
-    <section id="pricing" ref={ref} className="relative py-24 md:py-32 px-4">
+    <section id="pricing" ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -1834,7 +1834,7 @@ function Pricing() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               custom={i + 1}
-              className={`relative group rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 ${
+              className={`relative group rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 ${
                 t.popular
                   ? "bg-gradient-to-b from-pink-500/10 to-purple-500/5 border-2 border-pink-500/30 card-glow"
                   : "bg-zinc-900/50 border border-zinc-800 hover:border-pink-500/20"
@@ -1923,7 +1923,7 @@ function FAQItem({
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-zinc-900/50 transition-colors"
+        className="w-full flex items-center justify-between p-4 md:p-5 min-h-[48px] text-left hover:bg-zinc-900/50 transition-colors"
       >
         <span className="font-semibold pr-4">{q}</span>
         <motion.div
@@ -1996,7 +1996,7 @@ function FAQ() {
   ];
 
   return (
-    <section id="faq" ref={ref} className="relative py-24 md:py-32 px-4">
+    <section id="faq" ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="max-w-3xl mx-auto">
         <motion.div
           variants={fade}
@@ -2028,7 +2028,7 @@ function CTAFooter() {
   const { ref, inView } = useSection();
 
   return (
-    <section id="contact" ref={ref} className="relative py-24 md:py-32 px-4">
+    <section id="contact" ref={ref} className="relative py-16 md:py-24 lg:py-32 px-4">
       <div className="absolute inset-0 bg-gradient-to-t from-pink-500/[0.03] to-transparent" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
 
@@ -2062,7 +2062,7 @@ function CTAFooter() {
             placeholder="your@email.com"
             className="flex-1 px-5 py-3.5 rounded-full bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/50 transition-all"
           />
-          <button className="px-8 py-3.5 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-pink-500/25 flex items-center justify-center gap-2">
+          <button className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-pink-500/25 flex items-center justify-center gap-2">
             Get Your Own AI Agent
             <ArrowRight className="w-4 h-4" />
           </button>
