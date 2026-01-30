@@ -105,6 +105,75 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Gentle bob for Pinky images */
+@keyframes gentleBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-bob {
+  animation: gentleBob 3s ease-in-out infinite;
+}
+
+/* SaaS stack fall animation */
+@keyframes stackFall {
+  0% { opacity: 0; transform: translateY(-30px); }
+  60% { opacity: 1; transform: translateY(4px); }
+  80% { transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-stack-fall {
+  animation: stackFall 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Big X slash */
+@keyframes slashX {
+  0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.animate-slash-x {
+  animation: slashX 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Glow pulse for right side */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.2), 0 0 40px rgba(168, 85, 247, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.4), 0 0 80px rgba(168, 85, 247, 0.2); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Auto-scroll for mobile business cards */
+@keyframes autoScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-auto-scroll {
+  animation: autoScroll 30s linear infinite;
+}
+
+.animate-auto-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Perspective tilt card */
+.tilt-card {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  transform: perspective(800px) rotateY(-5deg) rotateX(5deg) scale(1.02);
+}
+
 /* Hide scrollbar for carousel */
 .scrollbar-hide {
   -ms-overflow-style: none;
