@@ -41,6 +41,10 @@ import {
   Infinity as InfinityIcon,
   Lightbulb,
   MessageCircle,
+  Scale,
+  Smartphone,
+  Headphones,
+  Radio,
 } from "lucide-react";
 
 /* ─────────────── helpers ─────────────── */
@@ -531,6 +535,102 @@ function WhatPinkyDoes() {
   );
 }
 
+/* ─────────────── Ecosystem Section ─────────────── */
+
+function EcosystemSection() {
+  const { ref, inView } = useSection();
+
+  const pillars = [
+    {
+      icon: BookOpen,
+      title: "Shared Knowledge",
+      desc: "Every rat we deploy gets access to our growing library of skills and best practices. SEO generators, email templates, marketing frameworks \u2014 your rat knows things you haven\u2019t even thought of yet.",
+    },
+    {
+      icon: Plug,
+      title: "Connected to Everything",
+      desc: "Supabase, Vercel, Stripe, Google Calendar, Slack, Telegram, CRMs, email providers \u2014 your rat knows how to connect them all. You just say what you want.",
+    },
+    {
+      icon: Shield,
+      title: "Managed by Us",
+      desc: "We handle databases, deployments, security, and maintenance. You have a dedicated admin system watching over your platform 24/7. You run the business. We run the infrastructure.",
+    },
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.02] to-transparent" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="text-center mb-6"
+        >
+          <p className="text-pink-400 font-mono text-sm uppercase tracking-wider mb-3">
+            Under the Hood
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            You don&apos;t need to know how it works.{" "}
+            <span className="gradient-text">Just that it works.</span>
+          </h2>
+        </motion.div>
+
+        <motion.p
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={1}
+          className="text-zinc-400 text-lg max-w-3xl mx-auto text-center mb-16 leading-relaxed"
+        >
+          Your rat comes pre-loaded with knowledge you didn&apos;t even know you needed.
+          SEO foundations. API integrations. Database architecture. Design systems.
+          It&apos;s not starting from scratch &mdash; it&apos;s starting from everything
+          we&apos;ve already built.
+        </motion.p>
+
+        {/* Three pillars */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {pillars.map((p, i) => (
+            <motion.div
+              key={p.title}
+              variants={scaleIn}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              custom={i + 2}
+              className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 card-glow transition-all duration-300 hover:border-pink-500/30 hover:-translate-y-1"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/15 to-purple-500/15 flex items-center justify-center mb-5 group-hover:from-pink-500/25 group-hover:to-purple-500/25 transition-all">
+                <p.icon className="w-7 h-7 text-pink-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">{p.title}</h3>
+              <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Punchline */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={6}
+          className="text-center"
+        >
+          <p className="text-2xl md:text-3xl font-bold">
+            <span className="text-zinc-500">You&apos;re the Brain. You have the ideas.</span>{" "}
+            <span className="gradient-text">We give you the rats to execute them.</span>
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────── What Would YOUR Pinky Do? ─────────────── */
 
 function WhatWouldPinkyDo() {
@@ -540,27 +640,70 @@ function WhatWouldPinkyDo() {
     {
       icon: HomeIcon,
       title: "Real Estate Agent",
-      text: "Build a customer service bot, connect it to your calendar, automate lead gen follow-ups, create property listing descriptions, send personalized emails to prospects.",
+      image: "/images/pinky-realestate.png",
+      bullets: [
+        "Customer service bot",
+        "Calendar integration",
+        "Lead gen follow-ups",
+        "Property descriptions",
+        "Prospect emails",
+      ],
     },
     {
       icon: ShoppingCart,
       title: "E-commerce / Dropshipper",
-      text: "Automate supplier comms, track inventory, write product descriptions, run SEO, generate social media content, build a custom dashboard.",
-    },
-    {
-      icon: Briefcase,
-      title: "Agency Owner",
-      text: "Client reporting on autopilot, project management, content creation pipeline, design assets, proposal generation.",
+      image: "/images/pinky-ecommerce.png",
+      bullets: [
+        "Supplier automation",
+        "Inventory tracking",
+        "Product descriptions & SEO",
+        "Social content creation",
+        "Custom dashboard",
+      ],
     },
     {
       icon: Rocket,
       title: "Startup Founder",
-      text: "Go from napkin sketch to deployed MVP. Database, frontend, APIs, auth \u2014 all connected. In days, not months.",
+      image: "/images/pinky-startup.png",
+      bullets: [
+        "Napkin to deployed MVP",
+        "Database + frontend + APIs",
+        "Auth & user management",
+        "Pitch deck generation",
+      ],
     },
     {
       icon: Video,
       title: "Content Creator",
-      text: "Video scripts, thumbnail generation, SEO optimization, email newsletters, social scheduling. Your whole content engine, automated.",
+      image: "/images/pinky-influencer.png",
+      bullets: [
+        "Video scripts & thumbnails",
+        "SEO optimization",
+        "Email newsletters",
+        "Social scheduling",
+      ],
+    },
+    {
+      icon: Scale,
+      title: "Legal / Finance",
+      image: "/images/pinky-lawyer.png",
+      bullets: [
+        "Contract drafting",
+        "Compliance review",
+        "Client intake automation",
+        "Document analysis",
+      ],
+    },
+    {
+      icon: Briefcase,
+      title: "Agency Owner",
+      image: "/images/pinky-multitask.png",
+      bullets: [
+        "Client reporting",
+        "Project management",
+        "Content pipeline",
+        "Proposal generation",
+      ],
     },
   ];
 
@@ -570,69 +713,68 @@ function WhatWouldPinkyDo() {
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-72 h-72 bg-pink-500/5 rounded-full blur-3xl -translate-y-1/2" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Image */}
-          <motion.div
-            variants={fade}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="relative order-2 lg:order-1"
-          >
-            <div className="relative rounded-2xl overflow-hidden border border-pink-500/20 shadow-2xl shadow-pink-500/10">
-              <Image
-                src="/images/pinky-multitask.png"
-                alt="Pinky juggling multiple tasks"
-                width={600}
-                height={400}
-                className="w-full h-auto rounded-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent" />
-            </div>
-            <div className="absolute -inset-4 bg-pink-500/5 blur-3xl rounded-full -z-10" />
-          </motion.div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="text-center mb-12"
+        >
+          <p className="text-pink-400 font-mono text-sm uppercase tracking-wider mb-3">
+            Built For Your Business
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            What would <span className="gradient-text">YOUR</span> Pinky do?
+          </h2>
+          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+            Every business is different. Every Pinky is different.
+            Here&apos;s what yours could look like.
+          </p>
+        </motion.div>
 
-          {/* Right: Content */}
-          <div className="order-1 lg:order-2">
+        {/* Business type cards — horizontal scroll on mobile, grid on desktop */}
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+          {businessTypes.map((bt, i) => (
             <motion.div
-              variants={fade}
+              key={bt.title}
+              variants={scaleIn}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
-              className="mb-8"
+              custom={i + 1}
+              className="flex-shrink-0 w-[300px] md:w-auto snap-center group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden transition-all duration-300 hover:border-pink-500/40 hover:shadow-xl hover:shadow-pink-500/10 hover:scale-[1.03]"
             >
-              <p className="text-pink-400 font-mono text-sm uppercase tracking-wider mb-3">
-                Built For Your Business
-              </p>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                What would <span className="gradient-text">YOUR</span> Pinky do?
-              </h2>
-              <p className="text-zinc-400 text-lg">
-                Every business is different. Every Pinky is different.
-                Here&apos;s what yours could look like.
-              </p>
-            </motion.div>
+              {/* Image */}
+              <div className="relative h-[200px] overflow-hidden bg-zinc-900">
+                <Image
+                  src={bt.image}
+                  alt={bt.title}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent" />
+              </div>
 
-            <div className="space-y-3">
-              {businessTypes.map((ex, i) => (
-                <motion.div
-                  key={i}
-                  variants={fade}
-                  initial="hidden"
-                  animate={inView ? "visible" : "hidden"}
-                  custom={i + 1}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-pink-500/30 transition-all duration-300 group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center shrink-0 group-hover:bg-pink-500/20 transition-colors mt-0.5">
-                    <ex.icon className="w-5 h-5 text-pink-400" />
+              {/* Content */}
+              <div className="p-5">
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
+                    <bt.icon className="w-4 h-4 text-pink-400" />
                   </div>
-                  <div>
-                    <h4 className="text-zinc-200 font-bold text-sm mb-1">{ex.title}</h4>
-                    <span className="text-zinc-400 text-sm leading-relaxed">{ex.text}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  <h3 className="font-bold text-lg">{bt.title}</h3>
+                </div>
+                <ul className="space-y-1.5">
+                  {bt.bullets.map((b) => (
+                    <li key={b} className="flex items-center gap-2 text-sm text-zinc-400">
+                      <Check className="w-3.5 h-3.5 text-pink-400 shrink-0" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -739,6 +881,108 @@ function NotJustAChatbot() {
           <p className="text-2xl md:text-3xl font-bold">
             <span className="text-zinc-500">ChatGPT gives you answers.</span>{" "}
             <span className="gradient-text">Pinky gives you results.</span>
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────── Talk From Anywhere ─────────────── */
+
+function TalkFromAnywhere() {
+  const { ref, inView } = useSection();
+
+  const points = [
+    {
+      icon: Mic,
+      title: "Voice Note From Your Car",
+      desc: "Driving? Send a voice note to Telegram. Your rat hears you, understands you, and gets to work before you park.",
+    },
+    {
+      icon: Smartphone,
+      title: "Text From the Couch",
+      desc: "On the couch? Text on WhatsApp. At the gym? Quick message on Slack. The rat meets you wherever you are.",
+    },
+    {
+      icon: Headphones,
+      title: "Always Working",
+      desc: "In a meeting? The rat\u2019s still working. On vacation? Still working. 3am? You guessed it. The hamster wheel never stops.",
+    },
+    {
+      icon: UsersRound,
+      title: "Rat Power for Everyone",
+      desc: "Want your employees to have rat power too? We integrate them. Everyone gets a rat. Each one specialized. No limit.",
+    },
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 px-4 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent" />
+      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="text-center mb-6"
+        >
+          <p className="text-pink-400 font-mono text-sm uppercase tracking-wider mb-3">
+            Not Tied to Your Keyboard
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            Talk from <span className="gradient-text">anywhere.</span>
+          </h2>
+        </motion.div>
+
+        <motion.p
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={1}
+          className="text-zinc-400 text-lg max-w-2xl mx-auto text-center mb-16 leading-relaxed"
+        >
+          The rat&apos;s running on the hamster wheel while you run your business.
+          You don&apos;t need to be at a computer. You don&apos;t even need to type.
+        </motion.p>
+
+        {/* Grid */}
+        <div className="grid sm:grid-cols-2 gap-6 mb-16">
+          {points.map((p, i) => (
+            <motion.div
+              key={p.title}
+              variants={fade}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              custom={i + 2}
+              className="group flex items-start gap-5 bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 card-glow transition-all duration-300 hover:border-pink-500/30"
+            >
+              <div className="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center shrink-0 group-hover:bg-pink-500/20 transition-colors">
+                <p.icon className="w-6 h-6 text-pink-400" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">{p.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom quote */}
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={7}
+          className="text-center"
+        >
+          <p className="text-xl md:text-2xl text-zinc-500 leading-relaxed max-w-3xl mx-auto">
+            Want more rats?{" "}
+            <span className="text-zinc-300 font-semibold">We add more rats.</span>{" "}
+            Each one specialized. No hiring. No training.{" "}
+            <span className="gradient-text font-bold">No limit.</span>
           </p>
         </motion.div>
       </div>
@@ -1283,8 +1527,10 @@ export default function Home() {
       <Hero />
       <Problem />
       <WhatPinkyDoes />
+      <EcosystemSection />
       <WhatWouldPinkyDo />
       <NotJustAChatbot />
+      <TalkFromAnywhere />
       <HowItWorks />
       <Testimonial />
       <Pricing />
